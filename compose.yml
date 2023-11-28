@@ -1,0 +1,10 @@
+# Docker compose file to start the listener 
+
+services:
+  listener:
+    image: ghcr.io/mtze/simple-http-listener
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - "DEBUG=false"

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -40,8 +41,13 @@ func logResponse(c *gin.Context) {
 }
 
 func main() {
+	if is_debug := os.Getenv("DEBUG"); is_debug == "true" {
+		log.SetLevel(log.DebugLevel)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	// Start the server
-	log.SetLevel(log.DebugLevel)
 	log.Info("Starting server...")
 
 	r := gin.Default()
